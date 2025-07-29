@@ -11,7 +11,7 @@ public partial class Character : Node2D {
     public delegate void OnHealEventHandler(int health);
 
     [Export]
-    private bool isPlayer;
+    public bool IsPlayer;
     
     [Export]
     private int currentHealth;
@@ -30,11 +30,13 @@ public partial class Character : Node2D {
         audioStreamPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
     }
 
-    private void BeginTurn() {
+    public void BeginTurn() {
         targetScale = 1.1f;
+
+        GD.Print(IsPlayer ? "Player turn has begun!" : "AI turn has begun!");
     }
 
-    private void EndTurn() {
+    public void EndTurn() {
         targetScale = 0.9f;
     }
 
@@ -53,5 +55,9 @@ public partial class Character : Node2D {
     private void PlayAudio(AudioStream stream) {
         audioStreamPlayer.Stream = stream;
         audioStreamPlayer.Play();
+    }
+
+    public void CastCombatAction(int action, Character opponent) {
+        
     }
 }
