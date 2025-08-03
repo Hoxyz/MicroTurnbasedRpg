@@ -1,5 +1,6 @@
-using System.Xml;
+using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 namespace MicroTurnBasedRPG.Scripts;
 
@@ -19,6 +20,9 @@ public partial class Character : Node2D {
     [Export]
     private int maxHealth;
 
+    [Export]
+    private Array<CombatAction> combatActions;
+    
     private float targetScale = 1f;
     
     private AudioStreamPlayer2D audioStreamPlayer;
@@ -57,7 +61,7 @@ public partial class Character : Node2D {
         audioStreamPlayer.Play();
     }
 
-    public void CastCombatAction(int action, Character opponent) {
+    public void CastCombatAction(CombatAction action, Character opponent) {
         
     }
 }

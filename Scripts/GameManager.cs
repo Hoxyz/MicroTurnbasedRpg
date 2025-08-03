@@ -38,22 +38,24 @@ public partial class GameManager : Node2D {
         else {
             var waitTime = GD.RandRange(0.5, 1.5);
             await ToSignal(GetTree().CreateTimer(waitTime), SceneTreeTimer.SignalName.Timeout);
+            var actionToCast = AiDecideCombatAction();
+            aiCharacter?.CastCombatAction(actionToCast, playerCharacter);
             await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
             NextTurn();
         }
     }
 
-    private async void PlayerCastCombatAction() {
+    private async void PlayerCastCombatAction(CombatAction action){
         if (currentCharacter != playerCharacter) {
                         
         }
 
-        playerCharacter?.CastCombatAction(0, aiCharacter);
+        playerCharacter?.CastCombatAction(action, aiCharacter);
         await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
         NextTurn();
     }
     
-    private void AiDecideCombatAction() {
-        
+    private CombatAction? AiDecideCombatAction() {
+        return null;
     }
 }
