@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://chfp1s7df4mlg"]
+[gd_scene load_steps=9 format=3 uid="uid://chfp1s7df4mlg"]
 
 [ext_resource type="Script" uid="uid://cgbktqcr2qg3c" path="res://Scripts/GameManager.cs" id="1_2h7oj"]
 [ext_resource type="Texture2D" uid="uid://f84jsu7uumxt" path="res://Sprites/backgroundCastles.png" id="1_vr6xi"]
@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://dl8tgul4fyn2b" path="res://CombatActions/Heal.tres" id="4_8teo4"]
 [ext_resource type="Resource" uid="uid://cles3assfo707" path="res://CombatActions/HeavyHit.tres" id="5_c5ef4"]
 [ext_resource type="Resource" uid="uid://bmmy64isf5kys" path="res://CombatActions/Slash.tres" id="6_u22qb"]
+[ext_resource type="Script" uid="uid://k72qcsqiubk0" path="res://Scripts/CombatActionButton.cs" id="7_c5ef4"]
+[ext_resource type="Script" uid="uid://c5se4tbf06l53" path="res://Scripts/CombatActionsUi.cs" id="7_u22qb"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("playerCharacter", "aiCharacter")]
 script = ExtResource("1_2h7oj")
@@ -31,3 +33,53 @@ combatActions = Array[Object]([ExtResource("4_8teo4"), ExtResource("5_c5ef4"), E
 [node name="AiCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(250, 0)
 combatActions = Array[Object]([ExtResource("4_8teo4"), ExtResource("5_c5ef4"), ExtResource("6_u22qb")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CombatActionsUi" type="Panel" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -155.0
+offset_right = 225.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("7_u22qb")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/CombatActionsUi"]
+layout_mode = 0
+offset_right = 223.0
+offset_bottom = 155.0
+size_flags_horizontal = 3
+
+[node name="CombatActionButton" type="Button" parent="CanvasLayer/CombatActionsUi/ButtonContainer"]
+layout_mode = 2
+text = "SLASH"
+script = ExtResource("7_c5ef4")
+
+[node name="CombatActionButton2" type="Button" parent="CanvasLayer/CombatActionsUi/ButtonContainer"]
+layout_mode = 2
+text = "SLASH"
+script = ExtResource("7_c5ef4")
+
+[node name="CombatActionButton3" type="Button" parent="CanvasLayer/CombatActionsUi/ButtonContainer"]
+layout_mode = 2
+text = "SLASH"
+script = ExtResource("7_c5ef4")
+
+[node name="PassTurnButton" type="Button" parent="CanvasLayer/CombatActionsUi/ButtonContainer"]
+layout_mode = 2
+text = "Pass Turn"
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CanvasLayer/CombatActionsUi"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 7.0
+offset_right = 441.0
+offset_bottom = 142.0
+bbcode_enabled = true
+text = "[b]Slash[/b]
+Deal 5 damage"

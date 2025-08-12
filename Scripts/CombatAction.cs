@@ -5,10 +5,10 @@ namespace MicroTurnBasedRPG.Scripts;
 [GlobalClass]
 public partial class CombatAction : Resource {
     [Export]
-    private string displayName;
+    public string DisplayName = null!;
 
     [Export]
-    private string description;
+    public string Description = null!;
 
     [Export]
     private int meleeDamage;
