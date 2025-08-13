@@ -20,7 +20,7 @@ public partial class Character : Node2D {
     private int maxHealth;
 
     [Export]
-    private Array<CombatAction> combatActions;
+    public Array<CombatAction> CombatActions = [];
     
     private float targetScale = 1f;
     

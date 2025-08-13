@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_u1bq4")
-displayName = "Heal"
-description = "Heal caster by 10"
+DisplayName = "Heal"
+Description = "Heals for 10"
 meleeDamage = 0
 healAmount = 10
 baseWeight = 100

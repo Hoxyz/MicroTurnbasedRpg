@@ -12,8 +12,11 @@ public partial class GameManager : Node2D {
     private Character? currentCharacter;
     private bool gameOver;
 
+    private CombatActionsUi playerUi = null!;
+    
     public override void _Ready() {
         base._Ready();
+        playerUi = GetNode<CombatActionsUi>("CanvasLayer/CombatActionsUi");
         NextTurn();
     }
 
@@ -32,9 +35,11 @@ public partial class GameManager : Node2D {
         currentCharacter?.BeginTurn();
 
         if (currentCharacter is {IsPlayer: true}) {
-            
+            playerUi.Visible = true;
+            playerUi.SetCombatActions(playerCharacter.CombatActions);
         }
         else {
+            playerUi.Visible = false;
             var waitTime = GD.RandRange(0.5, 1.5);
             await ToSignal(GetTree().CreateTimer(waitTime), SceneTreeTimer.SignalName.Timeout);
             var actionToCast = AiDecideCombatAction();
@@ -44,11 +49,10 @@ public partial class GameManager : Node2D {
         }
     }
 
-    public async void PlayerCastCombatAction(CombatAction action){
-        if (currentCharacter != playerCharacter) {
-                        
-        }
+    public async void PlayerCastCombatAction(CombatAction action) {
+        if (currentCharacter != playerCharacter) return;
 
+        playerUi.Visible = false;
         playerCharacter?.CastCombatAction(action, aiCharacter);
         await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
         NextTurn();

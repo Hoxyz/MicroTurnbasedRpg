@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 
@@ -29,8 +27,8 @@ public partial class CombatActionsUi : Panel
         }
     }
 
-    private void SetCombatActions(List<CombatAction> combatActions) {
-        for (int i = 0; i < combatActionButtons.Count; i++) {
+    public void SetCombatActions(Array<CombatAction> combatActions) {
+        for (var i = 0; i < combatActionButtons.Count; i++) {
             if (i >= combatActions.Count) {
                 combatActionButtons[i].Visible = false;
                 continue;

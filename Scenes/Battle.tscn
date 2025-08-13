@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://chfp1s7df4mlg"]
+[gd_scene load_steps=10 format=3 uid="uid://chfp1s7df4mlg"]
 
 [ext_resource type="Script" uid="uid://cgbktqcr2qg3c" path="res://Scripts/GameManager.cs" id="1_2h7oj"]
 [ext_resource type="Texture2D" uid="uid://f84jsu7uumxt" path="res://Sprites/backgroundCastles.png" id="1_vr6xi"]
 [ext_resource type="PackedScene" uid="uid://bhugiq5bktt2h" path="res://Scenes/character.tscn" id="3_1samx"]
+[ext_resource type="Script" uid="uid://bf6qy1v0b7nb4" path="res://Scripts/CombatAction.cs" id="4_6yjxy"]
 [ext_resource type="Resource" uid="uid://dl8tgul4fyn2b" path="res://CombatActions/Heal.tres" id="4_8teo4"]
 [ext_resource type="Resource" uid="uid://cles3assfo707" path="res://CombatActions/HeavyHit.tres" id="5_c5ef4"]
 [ext_resource type="Resource" uid="uid://bmmy64isf5kys" path="res://CombatActions/Slash.tres" id="6_u22qb"]
@@ -28,11 +29,10 @@ stretch_mode = 1
 [node name="PlayerCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(-250, 0)
 IsPlayer = true
-combatActions = Array[Object]([ExtResource("4_8teo4"), ExtResource("5_c5ef4"), ExtResource("6_u22qb")])
+CombatActions = Array[ExtResource("4_6yjxy")]([ExtResource("6_u22qb"), ExtResource("5_c5ef4"), ExtResource("4_8teo4")])
 
 [node name="AiCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(250, 0)
-combatActions = Array[Object]([ExtResource("4_8teo4"), ExtResource("5_c5ef4"), ExtResource("6_u22qb")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,7 +81,5 @@ offset_top = 7.0
 offset_right = 441.0
 offset_bottom = 142.0
 bbcode_enabled = true
-text = "[b]Slash[/b]
-Deal 5 damage"
 
 [connection signal="pressed" from="CanvasLayer/CombatActionsUi/ButtonContainer/PassTurnButton" to="CanvasLayer/CombatActionsUi" method="OnPassTurnButtonPressed"]
