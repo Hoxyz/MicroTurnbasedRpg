@@ -17,7 +17,7 @@ public partial class GameManager : Node2D {
         NextTurn();
     }
 
-    private async void NextTurn() {
+    public async void NextTurn() {
         if (gameOver) return;
 
         currentCharacter?.EndTurn();
@@ -44,7 +44,7 @@ public partial class GameManager : Node2D {
         }
     }
 
-    private async void PlayerCastCombatAction(CombatAction action){
+    public async void PlayerCastCombatAction(CombatAction action){
         if (currentCharacter != playerCharacter) {
                         
         }

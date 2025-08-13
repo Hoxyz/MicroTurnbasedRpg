@@ -3,10 +3,10 @@ using MicroTurnBasedRPG.Scripts;
 
 public partial class CombatActionButton : Button
 {
-    private CombatAction combatAction;
+    public CombatAction CombatAction;
 
     public void SetCombatAction(CombatAction combatAction) {
-        this.combatAction = combatAction;
+        CombatAction = combatAction;
         Text = combatAction.DisplayName;
     }
 }

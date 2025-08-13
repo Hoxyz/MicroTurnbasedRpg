@@ -83,3 +83,5 @@ offset_bottom = 142.0
 bbcode_enabled = true
 text = "[b]Slash[/b]
 Deal 5 damage"
+
+[connection signal="pressed" from="CanvasLayer/CombatActionsUi/ButtonContainer/PassTurnButton" to="CanvasLayer/CombatActionsUi" method="OnPassTurnButtonPressed"]
