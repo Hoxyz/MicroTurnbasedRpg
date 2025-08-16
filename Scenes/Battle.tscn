@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://chfp1s7df4mlg"]
+[gd_scene load_steps=13 format=3 uid="uid://chfp1s7df4mlg"]
 
 [ext_resource type="Script" uid="uid://cgbktqcr2qg3c" path="res://Scripts/GameManager.cs" id="1_2h7oj"]
 [ext_resource type="Texture2D" uid="uid://f84jsu7uumxt" path="res://Sprites/backgroundCastles.png" id="1_vr6xi"]
@@ -9,11 +9,19 @@
 [ext_resource type="Resource" uid="uid://bmmy64isf5kys" path="res://CombatActions/Slash.tres" id="6_u22qb"]
 [ext_resource type="Script" uid="uid://k72qcsqiubk0" path="res://Scripts/CombatActionButton.cs" id="7_c5ef4"]
 [ext_resource type="Script" uid="uid://c5se4tbf06l53" path="res://Scripts/CombatActionsUi.cs" id="7_u22qb"]
+[ext_resource type="Script" uid="uid://cuoo0ay06ceak" path="res://Scripts/EndScreen.cs" id="10_qxnh6"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("playerCharacter", "aiCharacter")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yjxy"]
+bg_color = Color(0.12, 0.11744, 0.1104, 0.760784)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yjxy"]
+font_size = 71
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("playerCharacter", "aiCharacter", "endScreen")]
 script = ExtResource("1_2h7oj")
 playerCharacter = NodePath("PlayerCharacter")
 aiCharacter = NodePath("AiCharacter")
+endScreen = NodePath("CanvasLayer/EndScreen")
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -1000
@@ -29,14 +37,15 @@ stretch_mode = 1
 [node name="PlayerCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(-250, 0)
 IsPlayer = true
-CurrentHealth = 115
-MaxHealth = 330
+CurrentHealth = 100
+MaxHealth = 100
 CombatActions = Array[ExtResource("4_6yjxy")]([ExtResource("6_u22qb"), ExtResource("5_c5ef4"), ExtResource("4_8teo4")])
 
 [node name="AiCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(250, 0)
-CurrentHealth = 285
-MaxHealth = 425
+CurrentHealth = 100
+MaxHealth = 100
+CombatActions = Array[ExtResource("4_6yjxy")]([ExtResource("4_8teo4"), ExtResource("5_c5ef4"), ExtResource("6_u22qb")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -86,4 +95,49 @@ offset_right = 441.0
 offset_bottom = 142.0
 bbcode_enabled = true
 
+[node name="EndScreen" type="Panel" parent="CanvasLayer" node_paths=PackedStringArray("headerLabel")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6yjxy")
+script = ExtResource("10_qxnh6")
+headerLabel = NodePath("HeaderLabel")
+
+[node name="HeaderLabel" type="Label" parent="CanvasLayer/EndScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -147.0
+offset_right = 152.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAYER WON"
+label_settings = SubResource("LabelSettings_6yjxy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer/EndScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -36.0
+offset_right = 151.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Again"
+
 [connection signal="pressed" from="CanvasLayer/CombatActionsUi/ButtonContainer/PassTurnButton" to="CanvasLayer/CombatActionsUi" method="OnPassTurnButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/EndScreen/PlayAgainButton" to="CanvasLayer/EndScreen" method="OnPlayAgainButtonClicked"]
