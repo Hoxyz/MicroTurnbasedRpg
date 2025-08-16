@@ -6,7 +6,7 @@
 script = ExtResource("1_u1bq4")
 DisplayName = "Heal"
 Description = "Heals for 10"
-meleeDamage = 0
-healAmount = 10
-baseWeight = 100
+MeleeDamage = 0
+HealAmount = 10
+BaseWeight = 100
 metadata/_custom_type_script = "uid://bf6qy1v0b7nb4"

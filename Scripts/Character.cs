@@ -14,17 +14,17 @@ public partial class Character : Node2D {
     public bool IsPlayer;
     
     [Export]
-    private int currentHealth;
+    public int CurrentHealth;
     
     [Export]
-    private int maxHealth;
+    public int MaxHealth;
 
     [Export]
     public Array<CombatAction> CombatActions = [];
     
     private float targetScale = 1f;
     
-    private AudioStreamPlayer2D audioStreamPlayer;
+    private AudioStreamPlayer2D? audioStreamPlayer;
     private AudioStream takeDamageSfx = GD.Load<AudioStream>("res://Audio/take_damage.wav");
     private AudioStream healSfx = GD.Load<AudioStream>("res://Audio/heal.wav");
     
@@ -49,18 +49,33 @@ public partial class Character : Node2D {
 
     private void TakeDamage(int damage) {
         PlayAudio(takeDamageSfx);
+        CurrentHealth -= damage;
+        EmitSignalOnTakeDamage(CurrentHealth);
     }
 
-    private void Heal(int heal) {
+    private void Heal(int healAmount) {
         PlayAudio(healSfx);
+        CurrentHealth += healAmount;
+        CurrentHealth = int.Clamp(CurrentHealth,0, MaxHealth);
+        EmitSignalOnHeal(CurrentHealth);
     }
 
     private void PlayAudio(AudioStream stream) {
+        if (audioStreamPlayer == null) return;
+        
         audioStreamPlayer.Stream = stream;
         audioStreamPlayer.Play();
     }
 
-    public void CastCombatAction(CombatAction action, Character opponent) {
+    public void CastCombatAction(CombatAction? action, Character opponent) {
+        if (action == null) return;
         
+        if (action.MeleeDamage > 0) {
+            opponent.TakeDamage(action.MeleeDamage);
+        }
+
+        if (action.HealAmount > 0) {
+            Heal(action.HealAmount);
+        }
     }
 }

@@ -29,10 +29,14 @@ stretch_mode = 1
 [node name="PlayerCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(-250, 0)
 IsPlayer = true
+CurrentHealth = 115
+MaxHealth = 330
 CombatActions = Array[ExtResource("4_6yjxy")]([ExtResource("6_u22qb"), ExtResource("5_c5ef4"), ExtResource("4_8teo4")])
 
 [node name="AiCharacter" parent="." instance=ExtResource("3_1samx")]
 position = Vector2(250, 0)
+CurrentHealth = 285
+MaxHealth = 425
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

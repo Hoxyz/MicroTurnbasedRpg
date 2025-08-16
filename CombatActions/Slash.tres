@@ -6,7 +6,7 @@
 script = ExtResource("1_flkuq")
 DisplayName = "Slash"
 Description = "Deals 8 damage"
-meleeDamage = 8
-healAmount = 0
-baseWeight = 100
+MeleeDamage = 8
+HealAmount = 0
+BaseWeight = 100
 metadata/_custom_type_script = "uid://bf6qy1v0b7nb4"

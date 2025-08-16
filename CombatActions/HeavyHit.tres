@@ -6,7 +6,7 @@
 script = ExtResource("1_8tdaj")
 DisplayName = "Heavy Hit"
 Description = "Deals 15 damage"
-meleeDamage = 15
-healAmount = 0
-baseWeight = 150
+MeleeDamage = 15
+HealAmount = 0
+BaseWeight = 150
 metadata/_custom_type_script = "uid://bf6qy1v0b7nb4"

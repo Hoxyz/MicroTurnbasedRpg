@@ -11,12 +11,12 @@ public partial class CombatAction : Resource {
     public string Description = null!;
 
     [Export]
-    private int meleeDamage;
+    public int MeleeDamage;
 
     [Export]
-    private int healAmount;
+    public int HealAmount;
     
     [Export]
-    private int baseWeight = 100;
+    public int BaseWeight = 100;
 
 }
