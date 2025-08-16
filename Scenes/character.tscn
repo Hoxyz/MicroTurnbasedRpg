@@ -15,8 +15,9 @@ font_size = 22
 shadow_color = Color(0, 0, 0, 0.596078)
 shadow_offset = Vector2(2, 2)
 
-[node name="Character" type="Node2D"]
+[node name="Character" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_ushfy")
+sprite = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_owm7s")

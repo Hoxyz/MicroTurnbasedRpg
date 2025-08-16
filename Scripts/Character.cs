@@ -21,6 +21,15 @@ public partial class Character : Node2D {
 
     [Export]
     public Array<CombatAction> CombatActions = [];
+
+    [Export]
+    private bool facingLeft;
+    
+    [Export]
+    private Sprite2D sprite = null!;
+
+    [Export]
+    private Texture2D displayTexture = null!;
     
     private float targetScale = 1f;
     
@@ -31,6 +40,8 @@ public partial class Character : Node2D {
     public override void _Ready() {
         base._Ready();
         audioStreamPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        sprite.FlipH = facingLeft;
+        sprite.Texture = displayTexture;
     }
 
     public void BeginTurn() {
